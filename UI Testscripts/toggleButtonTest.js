@@ -10,7 +10,6 @@ const { chromium } = require('playwright');
     const buttonAriaLabels = ['left aligned', 'centered', 'right aligned'];
 
     for (const ariaLabel of buttonAriaLabels) {
-      // Click the button and wait for the action to be processed
       await page.click(`[aria-label="${ariaLabel}"]`);
       await page.waitForTimeout(500);
 
@@ -22,7 +21,7 @@ const { chromium } = require('playwright');
 
       console.log(`Button "${ariaLabel}" selected: ${isSelected}`);
 
-      // Ensure no other buttons are selected
+      // This part ensures no other buttons are selected
       for (const otherLabel of buttonAriaLabels.filter(l => l !== ariaLabel)) {
         const isOtherSelected = await page.evaluate(({ otherLabel }) => {
           const button = Array.from(document.querySelectorAll('button')).find(b => b.ariaLabel === otherLabel);
